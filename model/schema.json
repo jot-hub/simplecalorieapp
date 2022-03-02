@@ -1,0 +1,63 @@
+{
+    "$jsonSchema": {
+      "type": "object",  
+      "required": [
+        "email",
+        "date",
+        "details"
+      ],
+      "properties": {
+        "_id": {},
+        "email": {
+          "type": "string",
+          "description": "\"email\" is a required string",
+          "format": "email"
+        },
+        "date": {
+          "type": "string",
+          "description": "\"date\" is a required string",
+          "minLength": 10,
+          "maxLength": 10
+        },
+        "details": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "timeOfDay",
+              "name",
+              "calories"
+            ],
+            "additionalProperties": false,
+            "description": "\"items\" must contain the stated fields.",
+            "properties": {
+              "detailId": {
+                "type": "string",
+                "minLength":24,
+                "maxLength":32
+              },
+              "timeOfDay": {
+                "type": "string",
+                "description": "\"timeOfDay\" is a required string",
+                "minLength": 5,
+                "maxLength": 5
+              },
+              "name": {
+                "type":"string",
+                "description": "\"name\" is a required field of type string",
+                "minLength": 1,
+                "maxLength": 50
+              },
+              "calories": {
+                "type": "number",
+                "description": "\"calories\" is a required field of type string",
+                "minimum": 0,
+                "maximum": 2000
+              }
+            }
+          }
+        }
+      }
+    }
+  }

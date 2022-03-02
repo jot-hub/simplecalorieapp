@@ -1,0 +1,91 @@
+<h2>My Entries</h2>
+
+
+<mat-expansion-panel [expanded] = "isEditPanelOpen" (opened)="isEditPanelOpen = true"
+                       (closed)="isEditPanelOpen = false" hideToggle>
+
+                       <ul class="entries">
+                        <li *ngFor="let detail of (selectedEntry.details)">
+                                <button [class.selected]="detail === selectedDetail" type="button" (click)="onSelectDetail(detail)">
+                                  <span class="badge">
+                                    {{ detail.timeOfDay }}
+                                  </span>
+                                  <span class="name">{{detail.name}}</span>
+                                  <span class="trailing-badge">
+                                    {{detail.calories}}
+                                  </span>
+                                </button>
+                        </li>
+                      </ul>     
+                      
+                      <span class="box">
+                        <button type="button" (click)="onAddDetailClick()">
+                          <span class="badge">
+                              >
+                          </span>
+                          <span class="name">Add New Detail</span>
+                        </button>
+                      </span>
+
+    <mat-grid-list cols="2" rowHeight="6:1">
+      <mat-grid-tile colspan=2>
+        <mat-form-field *ngIf="isNewEntry" class="example-form-field" appearance="fill">
+            <mat-label>Date</mat-label>
+            <input  matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" [min]="minDate" [max]="maxDate" [value]="selectedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker [startAt]="selectedDate"></mat-datepicker>
+        </mat-form-field>
+        <mat-label *ngIf="!isNewEntry">{{ Format(selectedDate, 'yyyy-MM-dd') }}</mat-label>
+      </mat-grid-tile>
+      <mat-grid-tile><mat-form-field class="example-form-field" appearance="fill">
+        <span><mat-label>Time of day</mat-label>
+          <input [readonly]="!isNewDetail" matInput type="text" [(ngModel)]="selectedDetail.timeOfDay" placeholder="00:00">
+        </span>
+      </mat-form-field></mat-grid-tile>
+      <mat-grid-tile><mat-form-field class="example-form-field" appearance="fill">
+        <span><mat-label>Food</mat-label>
+          <input [readonly]="!isNewDetail" matInput type="text" [(ngModel)]="selectedDetail.name" placeholder="">
+        </span>
+      </mat-form-field></mat-grid-tile>
+      <mat-grid-tile><mat-form-field class="example-form-field" appearance="fill">
+        <span><mat-label>Calories</mat-label>
+          <input [readonly]="!isNewDetail" matInput type="text" [(ngModel)]="selectedDetail.calories" placeholder="">
+        </span>
+      </mat-form-field></mat-grid-tile>
+      <mat-grid-tile>
+        <button *ngIf = "isNewDetail || isNewEntry" type="button" (click)="onCreate(); isEditPanelOpen=  false;">Add
+        </button>
+        <button *ngIf = "!isNewDetail && !isNewEntry" type="button" (click)="onDeleteDetail(); isEditPanelOpen=  false;">Delete
+        </button>
+        <button type="button" (click)="isEditPanelOpen=false">Cancel
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-expansion-panel>
+
+  <span class="box">
+    <button type="button" (click)="onAddClick()">
+      <span class="badge">
+          >
+      </span>
+      <span class="name">Add New Entry</span>
+    </button>
+  </span>
+
+<ul class="entries">
+  <li *ngFor="let entry of (entries$ | async)">
+          <button [class.selected]="entry === selectedEntry" type="button" (click)="isEditPanelOpen=true;onSelect(entry)">
+            <span [ngClass]="{'green-badge': totalCalories(entry.details)<greenValue, 'red-badge': totalCalories(entry.details)>yellowValue, 'yellow-badge': totalCalories(entry.details)>=greenValue}">
+              {{ totalCalories(entry.details) }}
+            </span>
+            <span class="name">{{entry.date}}</span>
+            <span class="trailing-badge">
+              {{entry.details.length}}
+            </span>
+          </button>
+
+          <span>
+            <mat-icon (click)="onDeleteEntry(entry.date)">close</mat-icon>
+          </span>
+  </li>
+</ul>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<title>Simple Calorie App</title>
+
+  <!-- CSS (load bootstrap from a CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body { padding-top:50px; }
+  </style>
+</head>
+
+<body class="container">
+
+<main>
+  <div class="jumbotron">
+    <h1>Let's start tracking calories:</h1>
+      <form action="/token" method="post" class="form-signin">
+        <div class="form-group">
+          <label for="email">Enter email address to begin:</label>
+          <input type="text" class="form-control" name="email" placeholder="Enter email">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  </div>
+
+  
+</main>
+
+</body>
+</html>

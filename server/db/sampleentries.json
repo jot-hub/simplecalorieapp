@@ -1,0 +1,23 @@
+[
+    {
+        "email": "p_jothi@yahoo.com",
+        "date": "2014-11-01",
+        "details":[
+            {"timeOfDay": "08:00", "name": "bananas", "calories": 100}
+        ]
+    },
+    {
+        "email": "p_jothi@yahoo.com",
+        "date": "2014-12-01",
+        "details":[
+            {"timeOfDay": "08:00", "name": "apples", "calories": 100}
+        ]
+    },
+    {
+        "email": "email1@domain1.com",
+        "date": "2014-12-01",
+        "details":[
+            {"timeOfDay": "08:00", "name": "oranges", "calories": 100}
+        ]
+    }
+  ]
